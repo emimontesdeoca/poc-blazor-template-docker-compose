@@ -1,5 +1,5 @@
 services:
-  boilerplate.blazor:
+  boilerplateblazor:
     image: ${DOCKER_REGISTRY-}boilerplateblazor
     build:
       context: .
