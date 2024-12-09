@@ -10,8 +10,8 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "8080:1337"
+      - "8081:1338"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
@@ -24,9 +24,3 @@ services:
     shm_size: 128mb
     environment:
       POSTGRES_PASSWORD: Your_password123
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
