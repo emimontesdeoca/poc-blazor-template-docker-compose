@@ -1,0 +1,26 @@
+services:
+  boilerplate.blazor:
+    image: ${DOCKER_REGISTRY-}boilerplateblazor
+    build:
+      context: .
+      dockerfile: src/Boilerplate.Blazor/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=BlazorHero;User=sa;Password=Your_password123;MultipleActiveResultSets=true;TrustServerCertificate=True
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      - "SA_PASSWORD=Your_password123"
+      - "ACCEPT_EULA=Y"
+    container_name: mssql
